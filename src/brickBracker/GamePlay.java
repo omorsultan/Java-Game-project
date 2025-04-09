@@ -30,8 +30,8 @@ public class GamePlay extends JPanel implements KeyListener , ActionListener {
         addKeyListener(this);
         setFocusable(true);
         setFocusTraversalKeysEnabled(false);
-        timer = new Time(delay,this);
-        timer.start();
+//        timer = new Time(delay,this);
+//        timer.start();
 
     }
     public void paint(Graphics g)
@@ -81,7 +81,7 @@ public class GamePlay extends JPanel implements KeyListener , ActionListener {
         {
             if(playerX<10)
             {
-                playerX=10
+                playerX=10;
             }
             else
             {
