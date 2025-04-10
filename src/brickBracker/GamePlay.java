@@ -70,6 +70,39 @@ public class GamePlay extends JPanel implements KeyListener , ActionListener {
             {
                 ballYdir = - ballYdir;
             }
+            for(int i =0;i<map.map.length;i++)
+            {
+                    for(int j=0;j<map.map[0].length;j++)
+                    {
+                        if(map.map[i][j]>0)
+                        {
+                            int brickX = j*map.brickWidth + 80;
+                            int brickY =map.brickHeight + 50;
+                            int brickWidth = map.brickWidth;
+                            int brickHeight = map.brickHeight;
+
+                            Rectangle rect = new Rectangle(brickX,brickY,brickWidth,brickHeight);
+                            Rectangle ballRect = new Rectangle(ballPosX,ballPosY,20,20);
+                            Rectangle brickRect = rect;
+
+                            if(ballRect.intersects(brickRect))
+                            {
+                                map.setBrickValue(0,i,j);
+                                totalBricks -- ;
+                                score += 5;
+//                                System.out.println(score);
+                                if(ballPosX +19<=brickRect.x||ballPosX+1>=brickRect.x +brickRect.width)
+                                {
+                                    ballXdir = - ballXdir;
+                                }
+                                else
+                                {
+                                    ballYdir=-ballYdir;
+                                }
+                            }
+                        }
+                    }
+            }
             ballPosX += ballXdir;
             ballPosY += ballYdir;
             if(ballPosX < 0 )
