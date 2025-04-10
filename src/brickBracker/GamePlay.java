@@ -70,7 +70,7 @@ public class GamePlay extends JPanel implements KeyListener , ActionListener {
             {
                 ballYdir = - ballYdir;
             }
-            for(int i =0;i<map.map.length;i++)
+          A:  for(int i =0;i<map.map.length;i++)
             {
                     for(int j=0;j<map.map[0].length;j++)
                     {
@@ -99,6 +99,7 @@ public class GamePlay extends JPanel implements KeyListener , ActionListener {
                                 {
                                     ballYdir=-ballYdir;
                                 }
+                                break A;
                             }
                         }
                     }
