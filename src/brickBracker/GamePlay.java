@@ -73,7 +73,7 @@ public class GamePlay extends JPanel implements KeyListener , ActionListener {
             g.drawString("Game Over ! \n Score is : "+score,220,280);
         }
 
-        g.dispose();
+//        g.dispose();
     }
     @Override
     public void actionPerformed(ActionEvent e) {
@@ -91,7 +91,7 @@ public class GamePlay extends JPanel implements KeyListener , ActionListener {
                         if(map.map[i][j]>0)
                         {
                             int brickX = j*map.brickWidth + 80;
-                            int brickY =map.brickHeight + 50;
+                            int brickY =i*map.brickHeight + 50;
                             int brickWidth = map.brickWidth;
                             int brickHeight = map.brickHeight;
 
