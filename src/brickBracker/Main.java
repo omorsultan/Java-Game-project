@@ -1,19 +1,32 @@
 package brickBracker;
 
 import javax.swing.*;
+import java.awt.*;
 
 public class Main
 {
     public static void main(String[] args)
     {
         JFrame obj = new JFrame();
-        GamePlay gamePlay = new GamePlay();
+
         obj.setSize(700,600);
-        obj.setTitle("Breakout Ball");
         obj.setResizable(false);
-        obj.setVisible(true);
+        obj.setTitle("Breakout Ball");
         obj.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-        obj.add(gamePlay);
+
+        BackgroundPanel bgPanel = new BackgroundPanel();
+        bgPanel.setLayout(new BorderLayout());
+        obj.setContentPane(bgPanel);
+
+        GamePlay gamePlay = new GamePlay();
+        gamePlay.setOpaque(false);
+        bgPanel.setLayout(new BorderLayout());
+        bgPanel.add(gamePlay);
+
+//        obj.add(gamePlay);
+        obj.setVisible(true);
+
+
 
     }
 }
