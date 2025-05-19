@@ -8,7 +8,6 @@ public class Main
     {
         JFrame obj = new JFrame();
         GamePlay gamePlay = new GamePlay();
-//        obj.setBounds(10,10,700,600);
         obj.setSize(700,600);
         obj.setTitle("Breakout Ball");
         obj.setResizable(false);

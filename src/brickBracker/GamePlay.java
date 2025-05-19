@@ -1,12 +1,7 @@
 package brickBracker;
-import javax.swing.JPanel;
 import javax.swing.*;
 import java.awt.*;
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
-import java.awt.event.KeyEvent;
-import java.awt.event.KeyListener;
-import java.sql.Time;
+import java.awt.event.*;
 
 public class GamePlay extends JPanel implements KeyListener , ActionListener {
 
@@ -28,7 +23,7 @@ public class GamePlay extends JPanel implements KeyListener , ActionListener {
     private MapGenerator map;
     public GamePlay()
     {
-        map = new MapGenerator(3,7);
+        map = new MapGenerator(3,7,2);
         addKeyListener(this);
         setFocusable(true);
         setFocusTraversalKeysEnabled(false);
