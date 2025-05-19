@@ -22,10 +22,10 @@ public class GamePlay extends JPanel implements KeyListener , ActionListener {
     private  int ballPosX = 120;
     private int ballPosY = 350;
 
-    private float speed ;
+    private float speed =30;
     private float ballXdir  ;
     private float ballYdir ;
-    private int paddleWidth ;
+    private int paddleWidth =150;
     private  int paddlePosX = 320;
 
     private MapGenerator map;
@@ -33,7 +33,7 @@ public class GamePlay extends JPanel implements KeyListener , ActionListener {
     public GamePlay()
     {
         setOpaque(false);
-        map = new MapGenerator(3,2,currentLevel);
+        map = new MapGenerator(3,7,currentLevel);
         addKeyListener(this);
         setFocusable(true);
         setFocusTraversalKeysEnabled(false);
@@ -41,8 +41,8 @@ public class GamePlay extends JPanel implements KeyListener , ActionListener {
         timer.start();
 
     }
-    public void paint(Graphics g) {
-
+    public void paintComponent(Graphics g) {
+        super.paintComponent(g);
         Graphics2D g2d = (Graphics2D) g.create();
         g2d.setComposite(AlphaComposite.getInstance(AlphaComposite.SRC_OVER, 0.8f));
 
@@ -65,6 +65,7 @@ public class GamePlay extends JPanel implements KeyListener , ActionListener {
         }
 
         Toolkit.getDefaultToolkit().sync();
+        g2d.dispose();
     }
     private void drawStartScreen(Graphics g) {
         g.setColor(Color.white);
@@ -128,7 +129,7 @@ public class GamePlay extends JPanel implements KeyListener , ActionListener {
     }
     @Override
     public void actionPerformed(ActionEvent e) {
-        if (gameState == GameState.PLAYING)
+        if (gameState == GameState.PLAYING && play)
         {
             if(play)
             {
@@ -141,25 +142,21 @@ public class GamePlay extends JPanel implements KeyListener , ActionListener {
                 {
                     for(int j=0;j<map.map[0].length;j++)
                     {
-                        if(map.map[i][j]>0)
-                        {
-                            int brickX = j*map.brickWidth + 80;
-                            int brickY =i*map.brickHeight + 50;
-                            int brickWidth = map.brickWidth;
-                            int brickHeight = map.brickHeight;
+                        if(map.map[i][j] > 0) {
+                            Rectangle brickRect = new Rectangle(
+                                    j * map.brickWidth + 80,
+                                    i * map.brickHeight + 50,
+                                    map.brickWidth,
+                                    map.brickHeight
+                            );
 
-                            Rectangle rect = new Rectangle(brickX,brickY,brickWidth,brickHeight);
-                            Rectangle ballRect = new Rectangle(ballPosX,ballPosY,20,20);
-                            Rectangle brickRect = rect;
-
-                            if(ballRect.intersects(brickRect))
-                            {
-                                map.setBrickValue(0,i,j);
-//                                totalBricks -- ;
-                                score += 5 *scoreMultiplier;
-                                if (map.map[i][j] >0) {
-                                    map.map[i][j] --;
+                            if(new Rectangle(ballPosX, ballPosY, 20, 20).intersects(brickRect)) {
+                                map.map[i][j]--;
+                                if(map.map[i][j] == 0) {
+                                    map.totalBricks--;
+                                    System.out.println("Bricks left: " + map.totalBricks); // Debug
                                 }
+                                score += 5 * scoreMultiplier;
 
 //                                System.out.println(score);
                                 if(ballPosX +19<=brickRect.x||ballPosX+1>=brickRect.x +brickRect.width)
@@ -220,7 +217,7 @@ public class GamePlay extends JPanel implements KeyListener , ActionListener {
     private void resetBallAndPaddle() {
         ballPosX = 120;
         ballPosY = 350;
-        speed=30;
+
         ballXdir = -.1f*speed;
         ballYdir = -.2f*speed;
         paddlePosX = 310;
@@ -232,6 +229,7 @@ public class GamePlay extends JPanel implements KeyListener , ActionListener {
         play = true;
         score = 0;
         lives = 3;
+        speed=30;
         currentLevel = 1;
         resetBallAndPaddle();
         map = new MapGenerator(3, 7, currentLevel);
@@ -239,6 +237,7 @@ public class GamePlay extends JPanel implements KeyListener , ActionListener {
     }
     private void nextLevel() {
         currentLevel++;
+        speed+=7;
         play = true;
         resetBallAndPaddle();
         map = new MapGenerator(3, 7, currentLevel);
@@ -276,39 +275,5 @@ public class GamePlay extends JPanel implements KeyListener , ActionListener {
     }
     @Override
     public void keyReleased(KeyEvent e)
-    {
-//        if(e.getKeyCode()== KeyEvent.VK_RIGHT)
-//        {
-//            if(playerX>=600)
-//            {
-//                playerX=600;
-//            }
-//            else
-//            {
-//                moveRight();
-//            }
-//        }
-//        if(e.getKeyCode()==KeyEvent.VK_LEFT)
-//        {
-//            if(playerX<10)
-//            {
-//                playerX=10;
-//            }
-//            else
-//            {
-//                moveLeft();
-//            }
-//        }
-
-    }
-//    public void moveRight()
-//    {
-//        play = true;
-//        paddlePosX+=50;
-//    }
-//    public void moveLeft()
-//    {
-//        play = true;
-//        playerX-=50;
-//    }
+    {}
 }
