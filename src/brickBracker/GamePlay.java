@@ -2,28 +2,37 @@ package brickBracker;
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.*;
+import java.util.Random;
 
 public class GamePlay extends JPanel implements KeyListener , ActionListener {
 
+    private enum GameState { START, PLAYING, GAME_OVER, LEVEL_COMPLETE, WIN }
+
+    private GameState gameState = GameState.START;
     private boolean play = false;
     private int score = 0;
-
+    private int lives = 3;
+    private int currentLevel = 1;
     private int totalBricks = 21 ;
+    private int scoreMultiplier = 1;
+
     private Timer timer;
     private int delay = 8;
 
     private  int playerX = 310;
+//    private int paddleWidth = 200;
 
     private  int ballPosX = 120;
     private int ballPosY = 350;
 
-    private int ballXdir = -1;
-    private int ballYdir = -2;
+    private int ballXdir = -2;
+    private int ballYdir = -4;
 
     private MapGenerator map;
+    private Random random = new Random();
     public GamePlay()
     {
-        map = new MapGenerator(3,7,2);
+        map = new MapGenerator(3,2,currentLevel);
         addKeyListener(this);
         setFocusable(true);
         setFocusTraversalKeysEnabled(false);
