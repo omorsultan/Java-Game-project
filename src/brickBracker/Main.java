@@ -5,11 +5,15 @@ import java.awt.*;
 
 public class Main
 {
+    // Constants to eliminate magic numbers - DRY Principle
+    private static final int WINDOW_WIDTH = 700;
+    private static final int WINDOW_HEIGHT = 600;
+    
     public static void main(String[] args)
     {
         JFrame obj = new JFrame();
 
-        obj.setSize(700,600);
+        obj.setSize(WINDOW_WIDTH, WINDOW_HEIGHT);
         obj.setResizable(false);
         obj.setTitle("Breakout Ball");
         obj.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
@@ -23,10 +27,6 @@ public class Main
         bgPanel.setLayout(new BorderLayout());
         bgPanel.add(gamePlay);
 
-//        obj.add(gamePlay);
         obj.setVisible(true);
-
-
-
     }
 }

@@ -7,6 +7,12 @@ import java.net.URL;
 import java.util.Random;
 
 public class BackgroundPanel extends JPanel {
+    // Constants to eliminate magic numbers - DRY Principle
+    private static final int PANEL_WIDTH = 700;
+    private static final int PANEL_HEIGHT = 600;
+    private static final int STAR_COUNT = 100;
+    private static final int MAX_STAR_SIZE = 3;
+    
     private Image backgroundImage;
 
     public BackgroundPanel() {
@@ -17,7 +23,7 @@ public class BackgroundPanel extends JPanel {
 
      Image createDefaultBackground() {
         // Create a simple gradient background if image loading fails
-        BufferedImage img = new BufferedImage(700, 600, BufferedImage.TYPE_INT_RGB);
+        BufferedImage img = new BufferedImage(PANEL_WIDTH, PANEL_HEIGHT, BufferedImage.TYPE_INT_RGB);
         Graphics2D g2d = img.createGraphics();
 
 
@@ -25,15 +31,15 @@ public class BackgroundPanel extends JPanel {
          GradientPaint gradient = new GradientPaint(0, 0, color1, getWidth()/2, getHeight()/2,color1);
          
          g2d.setPaint(gradient);
-        g2d.fillRect(0, 0, 700, 600);
+        g2d.fillRect(0, 0, PANEL_WIDTH, PANEL_HEIGHT);
 
 
         g2d.setColor(Color.WHITE);
         Random rand = new Random();
-        for (int i = 0; i < 100; i++) {
-            int x = rand.nextInt(700);
-            int y = rand.nextInt(600);
-            int size = rand.nextInt(3) + 1;
+        for (int i = 0; i < STAR_COUNT; i++) {
+            int x = rand.nextInt(PANEL_WIDTH);
+            int y = rand.nextInt(PANEL_HEIGHT);
+            int size = rand.nextInt(MAX_STAR_SIZE) + 1;
             g2d.fillOval(x, y, size, size);
         }
 
